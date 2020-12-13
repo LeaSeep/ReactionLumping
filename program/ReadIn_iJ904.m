@@ -14,7 +14,7 @@ function [preproccessedModel]=ReadIn_iJ904()
     
     matchIDX=cellfun(@(s) find(strcmp(s,metData(:,1))),fullModel.mets2,'UniformOutput',false);
     matchIDX(find(cellfun('isempty',matchIDX)))={'Unknown'};
-    matchIDX(find(cellfun(@(s) length(s)>1 ,matchIDX)))
+
     fullModel.DeltaG_m_std={};
     for i=1:length(matchIDX)
         if ~strcmp(metData(cell2mat(matchIDX(i)),2),'Unknown')
