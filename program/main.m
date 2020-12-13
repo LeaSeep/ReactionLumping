@@ -33,9 +33,7 @@ idx.toBelumped=find((isnan(fullModel.DeltaG_m_std)==1));
 %% Lumping procedure
 [alpha,lumpedModel,metsToDelete]=lumpReactions(fullModel,idx.toBelumped,true);
 
-
 %% DONE
-
 %% This section is to retrieve the timing data for the paper figures 2-3
 % Lumping with timings of different components of the procedure
 [alpha ,lumpedModel ,metsToDelete,Timing]=lumpReactions_timing(fullModel,idx.toBelumped,true);
@@ -70,7 +68,7 @@ FileName=['../result/' FileName 'Figure2Data_part1.csv'];
 writetable(T,FileName)
 
 %Data_part2
-dataToSaveGroup_NoMembers.T=[Timing_com.Group_NoMembers];
+dataToSaveGroup_NoMembers.T=[Timing.Group_NoMembers];
 T = struct2table(dataToSaveGroup_NoMembers);
 FileName=str2mat(eraseBetween(fullModel.description,match,fullModel.description(end),'Boundaries','inclusive'));
 FileName=['../result/' FileName 'Figure2Data_part2.csv'];
@@ -78,8 +76,8 @@ FileName=['../result/' FileName 'Figure2Data_part2.csv'];
 writetable(T,FileName)
 
 %Data3
-dataToSave_MetsLeft.MetsLeft=[Timing_com.MetsLeft_reason{:,1}]';
-dataToSave_MetsLeft.Type={Timing_com.MetsLeft_reason{:,2}}';
+dataToSave_MetsLeft.MetsLeft=[Timing.MetsLeft_reason{:,1}]';
+dataToSave_MetsLeft.Type={Timing.MetsLeft_reason{:,2}}';
 T = struct2table(dataToSave_MetsLeft);
 FileName=str2mat(eraseBetween(fullModel.description,match,fullModel.description(end),'Boundaries','inclusive'));
 FileName=['../result/' FileName 'Figure2Data_part3.csv'];
