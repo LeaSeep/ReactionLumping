@@ -138,8 +138,7 @@ function [alpha,L,remainAnIssue]=lumpReactions(model,idxToBeLumped,allowLumpingT
         end
         %% Group component
         [lumpVector_gr,lumpedRxn_gr,reactionsCoeff_gr]=basicLump(R,metsToLump_rel,intCutMat);
-        timeCounter1=timeCounter1+1;
-         
+        
         if isempty(lumpVector_gr)
             Feasbility=0;
         else
