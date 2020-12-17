@@ -33,6 +33,13 @@ idx.toBelumped=find((isnan(fullModel.DeltaG_m_std)==1));
 %% Lumping procedure
 [alpha,lumpedModel,metsToDelete]=lumpReactions(fullModel,idx.toBelumped,true);
 
+%% saving
+match='.';
+FileName=str2mat(eraseBetween(fullModel.description,match,fullModel.description(end),'Boundaries','inclusive'));
+FileName1=['../result/' FileName '_LumpedModel.mat'];
+save(FileName1, '-struct', 'lumpedModel');
+FileName2=['../result/' FileName '_alphaMatrix.mat'];
+save(FileName2, 'alpha');
 %% DONE
 %% This section is to retrieve the timing data for the paper figures 2-3
 % Lumping with timings of different components of the procedure
@@ -48,7 +55,6 @@ dataToSave={'before' 'known'   'rxns' (Timing.allRxns-Timing.NoRxnsUnconstrained
             'after' 'remain' 'mets' (Timing.NoMetsUnknown-Timing.NoMetsCouldBeEliminated_after)/Timing.allMets};
 % Convert cell to a table 
 T = cell2table(dataToSave(1:end,:));
-match = '.';
 FileName=str2mat(eraseBetween(fullModel.description,match,fullModel.description(end),'Boundaries','inclusive'));
 FileName=['../result/' FileName 'Figure1Data.csv'];
 % Write the table to a CSV file
