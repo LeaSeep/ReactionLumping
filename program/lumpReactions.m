@@ -27,7 +27,7 @@ function [alpha,L,remainAnIssue]=lumpReactions(model,idxToBeLumped,allowLumpingT
 %%
     disp("Lumping Procedure")
     %% Make sure to have splitted Model
-    if(any(model.lb<0))
+    if(any(model.lb<0)& model.reversibleModel)
         splitModel=convertToIrreversible(model);
     else
          splitModel=model;
@@ -161,6 +161,7 @@ function [alpha,L,remainAnIssue]=lumpReactions(model,idxToBeLumped,allowLumpingT
             relIDX=find(lumpVector_gr);
             LumpedRxnsIDX=absIDX(relIDX);
             tmp_alphaRow(LumpedRxnsIDX)=1;
+            
             alpha(nLumped,:)=[tmp_alphaRow];
             %
             timeStamp=(timeCounter/length(GR))*100;
@@ -266,7 +267,7 @@ function [alpha,L,remainAnIssue]=lumpReactions(model,idxToBeLumped,allowLumpingT
                    end
                    Lumped(:,nLumped)=tmp_Lumped;
                    tmp_Lumped(find(abs(tmp_Lumped)<1e-5))=0;
-                   
+
                    %make Matrix alpha
                     if isempty(LoopUpMatch)
                         %addToAlpha adjust accordinlgy 
@@ -286,6 +287,7 @@ function [alpha,L,remainAnIssue]=lumpReactions(model,idxToBeLumped,allowLumpingT
                         absIDX=find(isInvolvingUnknown);
                         relIDX=find(lumpVector_seq);
                         LumpedRxnsIDX=absIDX(relIDX);
+                        model.compartment(findMetIDs(model,findMetsFromRxns(model,model.rxns(LumpedRxnsIDX))));
                         tmp_alphaRow(LumpedRxnsIDX)=1;
                         alpha(nLumped,:)=[tmp_alphaRow]; 
                     end    
@@ -304,12 +306,12 @@ function [alpha,L,remainAnIssue]=lumpReactions(model,idxToBeLumped,allowLumpingT
         fprintf('Resulting in %d Lumped Reactions\nEqualing out %d mets with unknown Energy.\n',nLumped,lumpedMets);
     end
     %% Remove duplicate rows
-    before=size(alpha,1);
-    [~, alpha_tmp] = uniquetol(alpha, 'byrows', true);
-    alpha=alpha(sort(alpha_tmp), :);      %the unique rows, in the original order
-    after=size(alpha_tmp,1);
-    doubleEntries=before-after;
-    fprintf('Removed %d doubled entries\n',doubleEntries)
+    %before=size(alpha,1);
+    %[~, alpha_tmp] = uniquetol(alpha, 'byrows', true);
+    %alpha=alpha(sort(alpha_tmp), :);      %the unique rows, in the original order
+    %after=size(alpha_tmp,1);
+    %doubleEntries=before-after;
+    %fprintf('Removed %d doubled entries\n',doubleEntries)
     %% Statisics
     allZerosCols = find(sum(abs(alpha(:,logical(isInvolvingUnknown)))) == 0);
     %% Output
