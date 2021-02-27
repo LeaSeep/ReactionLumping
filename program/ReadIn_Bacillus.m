@@ -28,11 +28,20 @@ mask=zeros(length(fields),1);
 mask(find(strcmp(fields, 'S')))=1;
 mask(find(strcmp(fields, 'rxns')))=1;
 mask(find(strcmp(fields, 'mets')))=1;
+mask(find(strcmp(fields, 'metNames')))=1;
 mask(find(strcmp(fields, 'DeltaG_m_std')))=1;
+mask(find(strcmp(fields, 'metCharges')))=1;
 mask(find(strcmp(fields, 'lb')))=1;
 mask(find(strcmp(fields, 'ub')))=1;
 mask(find(strcmp(fields, 'c')))=1;
 model = rmfield(model,fields(~mask));
 
-
+%% identify compartments
+%get exchange reactions 
+%find mets that participate with negative coeff -> extracellular
+isExcRxns=findExcRxns(model);
+ReducedS=model.S(:,isExcRxns);
+idxExch=find(sum(ReducedS,2)==-1);
+model.compartment=repmat('c',length(model.mets),1);
+model.compartment(idxExch)='e';
 end
