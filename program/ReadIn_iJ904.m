@@ -1,8 +1,8 @@
 function [preproccessedModel]=ReadIn_iJ904()
-    %%Load in model 
+    %% Load in model 
     fullModel=readCbModel('../data/iJR904.xml');
     
-    %%
+    %% Load avaialble Data
     [~,~,rxnsData]=xlsread('../data/ExampleExcelSheet_ECOLI.xlsx','Rxns');
     [~,~,metData]=xlsread('../data/ExampleExcelSheet_ECOLI.xlsx','Mets');
     rxnsData(1,:)=[];
