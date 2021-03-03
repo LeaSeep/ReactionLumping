@@ -74,7 +74,7 @@ end
 model.mets=model.old_mets;
 
 result=model;
-result.compartment=result.metCompSymbol;
+result.compartment=cell2mat(result.metCompSymbol);
 result.conc_ub=conc_ranges.ub;
 result.conc_lb=conc_ranges.lb;
 
