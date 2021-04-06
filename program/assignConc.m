@@ -46,8 +46,9 @@ if(true)
 %intra cellular
     conc_ranges.lb(find((strcmp(model.mets,'h') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.0001*10^-3);
     conc_ranges.ub(find((strcmp(model.mets,'h') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.0001*10^-3);
-    conc_ranges.ub(find((strcmp(model.mets,'co2') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.01*10^-3); 
+    conc_ranges.ub(find((strcmp(model.mets,'co2') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.01*10^-3);
     conc_ranges.ub(find((strcmp(model.mets,'o2') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.0082*10^-3); 
+    %conc_ranges.lb(find((strcmp(model.mets,'o2') + ~strcmp(model.metCompSymbol,'e'))==2))=log(10^-12); 
     conc_ranges.lb(find((strcmp(model.mets,'atp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(8.13*10^-3);
     conc_ranges.ub(find((strcmp(model.mets,'atp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(11.4*10^-3);
     conc_ranges.lb(find((strcmp(model.mets,'adp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.437*10^-3); 
@@ -65,8 +66,7 @@ if(false) %Maranas ranges for gases
     conc_ranges.ub(find((strcmp(model.mets,'atp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(11.4*10^-3); 
     conc_ranges.lb(find((strcmp(model.mets,'adp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.437*10^-3);
     conc_ranges.ub(find((strcmp(model.mets,'adp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(0.704*10^-3); 
-    conc_ranges.lb(find((strcmp(model.mets,'atp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(8.13*10^-3); 
-    conc_ranges.ub(find((strcmp(model.mets,'atp') + ~strcmp(model.metCompSymbol,'e'))==2))=log(11.4*10^-3); 
+     
 end
 end
 %% Output
