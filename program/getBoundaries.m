@@ -34,8 +34,11 @@ function[metsConcRanges,x0]=getBoundaries(prepped_model,bigM,idxtoBelumped,optVa
 % Descicions made based on biological considerations (eg thight regulation
 % of Protons within the cell)
 notToLoose={'h[c]','pi[e]','so4[e]','nh4[e]','na1[e]','k[e]','fe2[e]','co2[e]','o2[e]','glyc[e]','glc__D[e]','atp[c]','adp[c]'};
+%notToLoose={'g3pe[c]','g3pg[c]','h2o[c]','cmp[c]','trdox[c]','nadh[c]'};
+%idx.essentAssocMets=[findMetIDs(prepped_model,notToLoose)];
 notToLooseIDX=[findMetIDs(prepped_model,notToLoose)];
 idx.essentAssocMets=setdiff(1:756,sort(notToLooseIDX));
+
 n.essen=length(idx.essentAssocMets);
 %% Parameter Setting 
 original=prepped_model;
