@@ -17,8 +17,8 @@ if contains(method,'Reed_aerobicGlucose')
     model.lb(find(contains(model.rxns,'EX_fe2')))=-1000;% 
     model.lb(find(contains(model.rxns,'EX_k')))=-1000; %
     model.lb(find(contains(model.rxns,'EX_na1')))=-1000;%
-    % vary depedning on simulation
-    model.lb(find(contains(model.rxns,'EX_o2')))=-1000;
+    % vary depending on simulation
+    model.lb(find(contains(model.rxns,'EX_o2')))=-1000; %-20
     if(~isempty(find(contains(model.rxns,'EX_glc__D_e'))))
          model.lb(find(contains(model.rxns,'EX_glc__D_e')))=-10;
     else
