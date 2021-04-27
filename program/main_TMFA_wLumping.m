@@ -38,7 +38,8 @@ fullModel.lb(findRxnIDs(fullModel,findIntracellularRxns(fullModel)))=-1000;
 fullModel.ub(findRxnIDs(fullModel,findIntracellularRxns(fullModel)))=1000;
 fullModel.ub(findExcRxns(fullModel)==1)=1000;
 fullModel.lb(fullModel.c==1)=0; %BioMass
-fullModel.ub(247)=7.6;%ATPM
+fullModel.ub(findRxnIDs(fullModel,{'ATPM'}))=7.6;%ATPM
+fullModel.lb(findRxnIDs(fullModel,{'ATPM'}))=7.6;%ATPM
 %Assign all reactions to be reversible
 blockedRxns=findBlockedReaction(fullModel);
 fullModel.lb(findRxnIDs(fullModel,blockedRxns))=0;
